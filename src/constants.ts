@@ -1,4 +1,22 @@
-import Home from '@screens/Home';
-import {Icon} from 'react-native-magnus';
-
-export const HOME_OPTIONS = {};
+export const Colors = {
+	PRIMARY: [
+		{
+			400: '#63b3ed',
+		},
+		{
+			500: '#4299e1',
+		},
+		{
+			600: '#3182ce',
+		},
+		{
+			700: '#2b6cb0',
+		},
+		{
+			800: '#2c5282',
+		},
+		{
+			900: '#2a4365',
+		},
+	],
+}

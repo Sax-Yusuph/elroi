@@ -1,8 +1,23 @@
-import React, {FC} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {AuthStackParamsList, OnBoardingParamsList} from '@navigation/types';
-import OnBoarding from '@screens/OnBoarding';
-import SignIn from '@screens/SignIn';
+import React, { FC } from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import OnBoarding from '@screens/OnBoarding'
+import SignIn from '@screens/SignIn'
+import SignUp from '@screens/signUp'
+import PreferenceScreen from '@screens/Preferences'
+import {
+	PreferenceStackParamsList,
+	AuthStackParamsList,
+	OnBoardingParamsList,
+	HomeStackParamsList,
+	FavouriteStackParamsList,
+	EventsStackParamsList,
+	NotesStackParamsList,
+} from 'navigation/types'
+import HomeScreen from '@screens/Home'
+import FavoritesScreen from '@screens/Favourites'
+import EventScreen from '@screens/Events'
+import SingleEventScreen from '@screens/SingleEvent'
+import NoteScreen from '@screens/Notes'
 
 // import NotesScreen from '@scenes/notes/notes.scene';
 // import EventScreen from '@scenes/events/events.scene';
@@ -32,62 +47,61 @@ import SignIn from '@screens/SignIn';
 // } from '@types';
 // import FavoritesScreen from '@scenes/favorites/favourites.scene';
 
-// const EventsStack = createStackNavigator<EventsStackParamsList>();
-// const Preferences = createStackNavigator<PreferenceStackParamsList>();
-const Onboarding = createStackNavigator<OnBoardingParamsList>();
-const Auth = createStackNavigator<AuthStackParamsList>();
-// const Notes = createStackNavigator<NotesStackParamsList>();
-// const AppHome = createStackNavigator<HomeStackParamsList>();
+const EventsStack = createStackNavigator<EventsStackParamsList>()
+const Preferences = createStackNavigator<PreferenceStackParamsList>()
+const Onboarding = createStackNavigator<OnBoardingParamsList>()
+const Auth = createStackNavigator<AuthStackParamsList>()
+const Notes = createStackNavigator<NotesStackParamsList>()
+const AppHome = createStackNavigator<HomeStackParamsList>()
 // const Streaming = createSharedElementStackNavigator<StreamStackParamsList>();
-// const Favorites = createSharedElementStackNavigator<FavouriteStackParamsList>();
+const Favorites = createStackNavigator<FavouriteStackParamsList>()
 
-// export const EventsNavigator = (): React.ReactElement => (
-//   <EventsStack.Navigator headerMode="none">
-//     <EventsStack.Screen name="Events" component={EventScreen} />
-//     <EventsStack.Screen name="SingleEvent" component={SingleEventScreen} />
-//     <EventsStack.Screen name="RegisterForEvent" component={RegisterForEvent} />
-//   </EventsStack.Navigator>
-// );
+export const EventsNavigator = (): React.ReactElement => (
+	<EventsStack.Navigator>
+		<EventsStack.Screen name='Events' component={EventScreen} />
+		<EventsStack.Screen name='SingleEvent' component={SingleEventScreen} />
+		{/* <EventsStack.Screen name="RegisterForEvent" component={RegisterForEvent} />  */}
+	</EventsStack.Navigator>
+)
 
 // /**userPreferences */
 
-// export const PreferenceNavigator = (): React.ReactElement => (
-//   <Preferences.Navigator headerMode="none">
-//     <Preferences.Screen name="Preferences" component={PreferencesScreen} />
-//   </Preferences.Navigator>
-// );
+export const PreferenceNavigator = (): React.ReactElement => (
+	<Preferences.Navigator headerMode='none'>
+		<Preferences.Screen name='Preferences' component={PreferenceScreen} />
+	</Preferences.Navigator>
+)
 
 export const OnBoardingNavigator: FC = () => (
-  <Onboarding.Navigator headerMode="none">
-    <Onboarding.Screen name="Onboarding" component={OnBoarding} />
-  </Onboarding.Navigator>
-);
+	<Onboarding.Navigator headerMode='none'>
+		<Onboarding.Screen name='Onboarding' component={OnBoarding} />
+	</Onboarding.Navigator>
+)
 
 export const AuthStackNavigator: FC = () => (
-  <Auth.Navigator headerMode="none">
-    <Auth.Screen name="SignUp" component={SignIn} />
-  </Auth.Navigator>
-);
+	<Auth.Navigator>
+		<Auth.Screen
+			name='SignUp'
+			component={SignUp}
+			options={{ title: ' Sign up', headerTransparent: true, headerTintColor: 'white' }}
+		/>
+	</Auth.Navigator>
+)
 
-// export const NotesNavigator = (): React.ReactElement => (
-//   <Notes.Navigator headerMode="none">
-//     <Notes.Screen name="Notes" component={NotesScreen} />
-//   </Notes.Navigator>
-// );
+export const NotesNavigator = (): React.ReactElement => (
+	<Notes.Navigator>
+		<Notes.Screen name='Notes' component={NoteScreen} />
+		<Notes.Screen name='Note' component={NoteScreen} />
+	</Notes.Navigator>
+)
 
-// export const HomeNavigator = (): React.ReactElement => (
-//   <AppHome.Navigator headerMode="none">
-//     <AppHome.Screen name="Home" component={HomeScreen} />
-//     <AppHome.Screen
-//       name="JoinEvent"
-//       component={JoinEventScreen}
-//       options={{headerShown: true}}
-//     />
-//     <AppHome.Screen name="Notifications" component={NotificationsScreen} />
-//     <AppHome.Screen name="Notification" component={NotificationScreen} />
-//     <AppHome.Screen name="Auth" component={AuthNavigator} />
-//   </AppHome.Navigator>
-// );
+export const HomeNavigator = (): React.ReactElement => (
+	<AppHome.Navigator>
+		<AppHome.Screen name='Home' component={HomeScreen} />
+		<AppHome.Screen name='Notifications' component={HomeScreen} />
+		<AppHome.Screen name='Notification' component={HomeScreen} />
+	</AppHome.Navigator>
+)
 
 // //@ts-ignore
 // const {Navigator, Screen} = createSharedElementStackNavigator();
@@ -124,9 +138,12 @@ export const AuthStackNavigator: FC = () => (
 //   </Streaming.Navigator>
 // );
 
-// export const FavouritesNavigator = (): React.ReactElement => (
-//   <Favorites.Navigator headerMode="none">
-//     <Favorites.Screen name="Favorites" component={FavoritesScreen} />
-//     <Favorites.Screen name="Favorite" component={FavoritesScreen} />
-//   </Favorites.Navigator>
-// );
+export const FavouritesNavigator = (): React.ReactElement => (
+	<Favorites.Navigator>
+		<Favorites.Screen name='Favorites' component={FavoritesScreen} />
+		<Favorites.Screen name='Favorite' component={FavoritesScreen} />
+	</Favorites.Navigator>
+)
+function createSharedElementStackNavigator<T>() {
+	throw new Error('Function not implemented.')
+}

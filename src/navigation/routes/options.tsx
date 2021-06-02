@@ -1,54 +1,64 @@
-import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
-import React from 'react';
-import {Icon, Text} from 'react-native-magnus';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
+import React from 'react'
+import { Icon, Text } from 'react-native-magnus'
 
-type Routes = 'home' | 'favorites' | 'notes' | 'events' | 'more';
+type Routes = 'home' | 'favorites' | 'notes' | 'events' | 'more'
 
 interface HomeOptions extends Record<Routes, BottomTabNavigationOptions> {}
 
 export const HOME_TAB_OPTIONS: HomeOptions = {
-  home: {
-    tabBarIcon: props => <Icon name="home" fontSize="xl" {...props} />,
-    tabBarLabel: props => (
-      <Text fontSize="xs" {...props} mb={5}>
-        Home
-      </Text>
-    ),
-  },
+	home: {
+		tabBarIcon: ({ color, size: fontSize }) => (
+			<Icon name='ios-home' fontFamily='Ionicons' {...{ color, fontSize }} />
+		),
+		tabBarLabel: props => (
+			<Text fontSize='xs' color={props.color} mb={5}>
+				Home
+			</Text>
+		),
+	},
 
-  favorites: {
-    tabBarIcon: props => <Icon name="home" fontSize="xl" {...props} />,
-    tabBarLabel: props => (
-      <Text fontSize="xs" {...props} mb={5}>
-        Home
-      </Text>
-    ),
-  },
+	favorites: {
+		tabBarIcon: ({ color, size: fontSize }) => (
+			<Icon name='ios-heart' fontFamily='Ionicons' {...{ color, fontSize }} />
+		),
+		tabBarLabel: props => (
+			<Text fontSize='xs' color={props.color} mb={5}>
+				Favourites
+			</Text>
+		),
+	},
 
-  notes: {
-    tabBarIcon: props => <Icon name="home" fontSize="xl" {...props} />,
-    tabBarLabel: props => (
-      <Text fontSize="xs" {...props} mb={5}>
-        Home
-      </Text>
-    ),
-  },
+	notes: {
+		tabBarIcon: ({ color, size: fontSize }) => (
+			<Icon fontFamily='Ionicons' name='md-create' {...{ color, fontSize }} />
+		),
+		tabBarLabel: ({ color }) => (
+			<Text fontSize='xs' mb={5} {...{ color }}>
+				Notes
+			</Text>
+		),
+	},
 
-  events: {
-    tabBarIcon: props => <Icon name="home" fontSize="xl" {...props} />,
-    tabBarLabel: props => (
-      <Text fontSize="xs" {...props} mb={5}>
-        Home
-      </Text>
-    ),
-  },
+	events: {
+		tabBarIcon: ({ color, size: fontSize }) => (
+			<Icon fontFamily='Feather' name='map-pin' {...{ color, fontSize }} />
+		),
+		tabBarLabel: props => (
+			<Text fontSize='xs' color={props.color} mb={5}>
+				Events
+			</Text>
+		),
+	},
 
-  more: {
-    tabBarIcon: props => <Icon name="home" fontSize="xl" {...props} />,
-    tabBarLabel: props => (
-      <Text fontSize="xs" {...props} mb={5}>
-        Home
-      </Text>
-    ),
-  },
-};
+	more: {
+		tabBarIcon: ({ color, size: fontSize }) => (
+			<Icon fontFamily='Feather' name='menu' {...{ color, fontSize }} />
+		),
+		tabBarLabel: ({ color }) => (
+			<Text fontSize='xs' mb={5} {...{ color }}>
+				More
+			</Text>
+		),
+	},
+}

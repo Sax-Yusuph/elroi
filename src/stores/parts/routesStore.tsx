@@ -1,21 +1,20 @@
-import create from 'zustand';
+import create, { SetState } from 'zustand'
+
+export type RouteStates =
+	| 'Onboarding'
+	| 'UserPreferences'
+	| 'Auth'
+	| 'GuestMode'
+	| 'EventStream'
+	| 'App'
 
 type Props = {
-  showOnboarding: boolean;
-  showPreferences: boolean;
-  showApp: boolean;
-  showAuth: boolean;
-  setPreferences: boolean;
-  showEventStream: boolean;
-  isGuest: boolean;
-};
+	//
+	currentRoute: RouteStates
+	setCurrentRoute: (string: RouteStates) => void
+}
 
 export const useRouteState = create<Props>(set => ({
-  showOnboarding: true,
-  showPreferences: false,
-  showApp: false,
-  showAuth: false,
-  setPreferences: false,
-  showEventStream: false,
-  isGuest: false,
-}));
+	currentRoute: 'Onboarding',
+	setCurrentRoute: route => set({ currentRoute: route }),
+}))
