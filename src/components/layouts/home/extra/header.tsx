@@ -1,10 +1,9 @@
-import { AnimatedTextButton } from '@elements/Button'
-import JoinEventInput from '@elements/joinEventInput'
 import React from 'react'
-import { StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { useWindowDimensions } from 'react-native'
 import { View } from 'react-native-animatable'
 import { Div, Text, Icon } from 'react-native-magnus'
 import FeatherIcons from 'react-native-vector-icons/Feather'
+import { JoinEventInput, AnimatedTextButton } from '@elements'
 
 interface ListHeaderProps {
 	goToEventsScreen: () => void
@@ -13,6 +12,7 @@ interface ListHeaderProps {
 
 export const ListHeader = ({ goToEventsScreen, joinEvent }: ListHeaderProps) => {
 	const { width } = useWindowDimensions()
+
 	return (
 		<>
 			<Div p='xl' mb='3xl'>

@@ -42,7 +42,7 @@ export const HOME_TAB_OPTIONS: HomeOptions = {
 
 	events: {
 		tabBarIcon: ({ color, size: fontSize }) => (
-			<Icon fontFamily='Feather' name='map-pin' {...{ color, fontSize }} />
+			<Icon fontFamily='MaterialIcons' name='location-pin' {...{ color, fontSize }} />
 		),
 		tabBarLabel: props => (
 			<Text fontSize='xs' color={props.color} mb={5}>

@@ -11,6 +11,7 @@ import {
 } from '../types'
 import { HOME_TAB_OPTIONS } from './options'
 import { EventsNavigator, FavouritesNavigator, HomeNavigator, NotesNavigator } from './Stacks'
+import { useRouteState } from '@stores'
 
 export type HomeTabsParamsList = {
 	Home: NavigatorScreenParams<HomeStackParamsList>

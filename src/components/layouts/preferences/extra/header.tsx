@@ -1,4 +1,4 @@
-import { ImageOverlay, OverlayImageStyle } from '@elements/imageOverlay'
+import { ImageOverlay, OverlayImageStyle } from '@elements'
 import React from 'react'
 
 import { useWindowDimensions } from 'react-native'

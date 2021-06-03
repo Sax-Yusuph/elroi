@@ -9,31 +9,38 @@
  * CompositeNavigationProp<primary screen, secondary screen>
  */
 
-import {CompositeNavigationProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamsList} from '../..';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { SharedElementRoute } from 'react-navigation-shared-element'
+import { RootParamsList } from '../..'
 
-import {StreamStackParamsList} from './types';
+import { StreamStackParamsList } from './types'
 
-type StreamRoot = StackNavigationProp<RootParamsList, 'StreamEvent'>;
+/** fullscreen event streaming */
 
-export interface FullScreenVideoProp {
-  navigation: CompositeNavigationProp<
-    StackNavigationProp<StreamStackParamsList, 'FullScreenVideoMode'>,
-    StreamRoot
-  >;
+export type FullScreenVideoRoute = SharedElementRoute<'FullScreenVideoMode', { videoId: string }>
+export interface FullScreenVideoProps {
+	navigation: CompositeNavigationProp<
+		StackNavigationProp<StreamStackParamsList, 'FullScreenVideoMode'>,
+		StackNavigationProp<RootParamsList, 'StreamEvent'>
+	>
+	route: RouteProp<StreamStackParamsList, 'FullScreenVideoMode'>
 }
 
-export interface StreamingScreenProp {
-  navigation: CompositeNavigationProp<
-    StackNavigationProp<StreamStackParamsList, 'Transcript'>,
-    StreamRoot
-  >;
+/**  event streaming */
+export interface StreamingScreenProps {
+	navigation: CompositeNavigationProp<
+		StackNavigationProp<StreamStackParamsList, 'StreamingScreen'>,
+		StackNavigationProp<RootParamsList, 'StreamEvent'>
+	>
+	route: RouteProp<StreamStackParamsList, 'StreamingScreen'>
 }
 
-export interface TranscriptScreenProp {
-  navigation: CompositeNavigationProp<
-    StackNavigationProp<StreamStackParamsList, 'StreamingScreen'>,
-    StreamRoot
-  >;
+/**  event transcript */
+export interface TranscriptScreenProps {
+	navigation: CompositeNavigationProp<
+		StackNavigationProp<StreamStackParamsList, 'Transcript'>,
+		StackNavigationProp<RootParamsList, 'StreamEvent'>
+	>
+	route: RouteProp<StreamStackParamsList, 'Transcript'>
 }

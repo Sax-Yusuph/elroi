@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import ContentView from '@layouts/events'
+import ContentView from '@layouts/singleEvent.tsx'
 import { StatusBar } from 'react-native-magnus'
-import { EventScreenProp, HomeScreenProp } from 'navigation/types'
+import { EventScreenProp, HomeScreenProp, SingleEventScreenProp } from 'navigation/types'
 import { EventData } from '@types'
 import { Data } from '@models/mockData'
 
-const SingleEvent: React.FC<EventScreenProp> = ({ navigation }) => {
-	const [EventsData, setEventsData] = useState<EventData[]>([])
+const SingleEvent: React.FC<SingleEventScreenProp> = ({ route, navigation }) => {
+	const [event, setEvent] = useState<EventData | null>(null)
 
 	useEffect(() => {
-		setTimeout(() => {
-			setEventsData(Data)
-		}, 300)
+		const { eventId } = route.params
+
+		const _data = Data.find(event => event.id === eventId)
+		if (_data) {
+			setEvent(_data)
+		}
 	}, [])
 
-	const goToEventsScreen = () => {
+	const registerEvent = () => {
 		// navigation.navigate('Events', { screen: 'Events' })
-	}
-
-	const joinEvent = (eventId: string) => {
-		// navigation.navigate('StreamService', {
-		// 	screen: 'StreamingScreen',
-		// 	params: { eventId },
-		// })
-	}
-
-	const viewEvent = (id: string) => {
-		// navigation.navigate('')
 	}
 
 	return (
 		<>
 			<StatusBar hidden={false} />
-			<ContentView {...{ joinEvent, goToEventsScreen, viewEvent, EventsData }} />
+			{event?.title && <ContentView {...{ registerEvent, event }} />}
 		</>
 	)
 }

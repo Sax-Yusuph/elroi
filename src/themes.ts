@@ -151,13 +151,13 @@ export const lightTheme: ThemeType = {
 		textDark: 'gray900',
 	},
 	fontFamily: {
-		normal: 'Karla-Regular',
-		bold: 'Rubik-Bold',
+		normal: 'ProximaNova-Regular',
+		bold: 'OpenSans-Bold',
 		// medium: 'Karla-Medium',
 		100: 'Karla-Regular',
-		500: 'Karla-Medium',
+		500: 'Inter-Medium',
 		700: 'Karla-Bold',
-		900: 'Karla-Bold',
+		900: 'Inter-Bold',
 	},
 }
 

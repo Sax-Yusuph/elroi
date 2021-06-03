@@ -6,7 +6,7 @@
 
 //Events
 export type EventsStackParamsList = {
-	Events: undefined
+	EventScreen: undefined
 	SingleEvent: { eventId: string }
 	RegisterForEvent: undefined
 }
@@ -23,13 +23,13 @@ export type OnBoardingParamsList = {
 
 //Notes
 export type NotesStackParamsList = {
-	Notes: undefined
+	NoteScreen: undefined
 	Note: { noteId: string }
 }
 
 //Home
 export type HomeStackParamsList = {
-	Home: undefined
+	HomeScreen: undefined
 	Notifications: undefined
 	Notification: { notificationId: string }
 }
@@ -48,7 +48,7 @@ export type AuthStackParamsList = {
 }
 
 export type FavouriteStackParamsList = {
-	Favorites: undefined
+	FavoriteScreen: undefined
 	Favorite: { eventId: string }
 }
 

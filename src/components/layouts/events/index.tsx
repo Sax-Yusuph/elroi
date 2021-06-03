@@ -1,10 +1,10 @@
-import EventCard from '@elements/eventCard'
+import { FocusAwareStatusBar, EventCard } from '@elements'
 import { useHeaderHeight } from '@react-navigation/stack'
 import { EventData } from '@types'
 import React, { useMemo, useState } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet, useWindowDimensions } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import { StatusBar, useTheme } from 'react-native-magnus'
+import { useTheme } from 'react-native-magnus'
 import { ListHeader } from './extra/header'
 
 type ViewEvent = (id: string) => void
@@ -36,7 +36,7 @@ export default ({ joinEvent, goToEventsScreen, viewEvent, EventsData }: Props) =
 			})}
 			keyboardVerticalOffset={headerHeight}
 		>
-			<StatusBar />
+			<FocusAwareStatusBar />
 
 			<FlatList
 				contentContainerStyle={{ backgroundColor: gray100 }}

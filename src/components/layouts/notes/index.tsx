@@ -1,8 +1,7 @@
-import NoteCard from '@elements/noteCard'
-import { ScreenProps } from '@types'
-import { format } from 'date-fns'
+import { FocusAwareStatusBar } from '@elements'
+import NoteCard from 'components/elements/all/noteCard'
 import React from 'react'
-import { Image, StyleSheet, useWindowDimensions } from 'react-native'
+import { useWindowDimensions } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { FlatList } from 'react-native-gesture-handler'
 import { Div, Text } from 'react-native-magnus'
@@ -17,6 +16,7 @@ const NotesScreen = ({ viewNote, Data }: Props) => {
 	const { height } = useWindowDimensions()
 	return (
 		<Div bg='gray100' justifyContent='center' alignItems='center'>
+			<FocusAwareStatusBar />
 			<FlatList
 				data={Data}
 				numColumns={2}

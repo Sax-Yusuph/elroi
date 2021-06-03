@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ContentView from '@layouts/home'
-import { StatusBar } from 'react-native-magnus'
 import { HomeScreenProp } from 'navigation/types'
 import { EventData } from '@types'
 import { Data } from '@models/mockData'
-import { useIsFocused } from '@react-navigation/native'
-import { OptimizedHeavyScreen } from 'react-navigation-heavy-screen'
+import { useEventState, useRouteState } from '@stores'
 
 const Home: React.FC<HomeScreenProp> = ({ navigation }) => {
 	const [EventsData, setEventsData] = useState<EventData[]>([])
-	const isFocused = useIsFocused()
+	const { setCurrentRoute } = useRouteState(state => state)
+	const { setEventId } = useEventState(state => state)
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -18,26 +17,20 @@ const Home: React.FC<HomeScreenProp> = ({ navigation }) => {
 	}, [])
 
 	const goToEventsScreen = () => {
-		// navigation.navigate('Events', { screen: 'Events' })
+		console.log('pressed')
+		navigation.navigate('Events', { screen: 'EventScreen' })
 	}
 
 	const joinEvent = (eventId: string) => {
-		// navigation.navigate('StreamService', {
-		// 	screen: 'StreamingScreen',
-		// 	params: { eventId },
-		// })
+		setEventId(eventId)
+		setCurrentRoute('EventStream')
 	}
 
-	const viewEvent = (id: string) => {
-		// navigation.navigate('')
+	const viewEvent = (eventId: string) => {
+		navigation.navigate('Events', { screen: 'SingleEvent', params: { eventId } })
 	}
 
-	return (
-		<>
-			{isFocused && <StatusBar backgroundColor='gray100' animated />}
-			<ContentView {...{ joinEvent, goToEventsScreen, viewEvent, EventsData }} />
-		</>
-	)
+	return <ContentView {...{ joinEvent, goToEventsScreen, viewEvent, EventsData }} />
 }
 
 export default Home

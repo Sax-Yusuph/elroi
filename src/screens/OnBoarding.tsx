@@ -3,15 +3,12 @@ import React, { memo } from 'react'
 import { RootMainNavigationProp } from '../router/routerTypes'
 import ContentView from '@layouts/onboarding'
 import useStatusBar from '@hooks/useStatusBar'
-import { RootParamsList } from '@navigation/*'
+import { RootParamsList } from '@navigation/index'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useRouteState } from '@stores'
+import { OnboardingScreenProps } from 'navigation/types'
 
-type Props = { navigation: StackNavigationProp<RootParamsList, 'OnBoarding'> }
-
-const OnBoarding: React.FC<Props> = memo(({ navigation }) => {
-	useStatusBar({ hidden: true })
-
+const OnBoarding: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
 	const { setCurrentRoute } = useRouteState(state => state)
 
 	const onOnboardingDone = () => {
@@ -20,7 +17,7 @@ const OnBoarding: React.FC<Props> = memo(({ navigation }) => {
 
 	const joinEvent = () => {
 		setCurrentRoute('GuestMode')
-		navigation.navigate('JoinEvent', { screen: 'JoinEvent' })
+		navigation.navigate('Guest', { screen: 'JoinEvent' })
 	}
 
 	const signUp = () => {

@@ -15,13 +15,18 @@ import {
 import RNBootSplash from 'react-native-bootsplash'
 import { RouteStates, useRouteState } from '@stores'
 import { lightTheme } from 'themes'
-import { AuthStackNavigator, OnBoardingNavigator, PreferenceNavigator } from './routes/Stacks'
-import Preferences from '@screens/Preferences'
+import {
+	AuthStackNavigator,
+	OnBoardingNavigator,
+	PreferenceNavigator,
+	StreamingNavigator,
+} from './routes/Stacks'
+import { OverflowMenuProvider } from 'react-navigation-header-buttons'
 
 export type RootParamsList = {
-	OnBoarding: NavigatorScreenParams<OnBoardingParamsList>
+	OnBoardingMode: NavigatorScreenParams<OnBoardingParamsList>
 
-	Preferences: NavigatorScreenParams<PreferenceStackParamsList>
+	PreferenceMode: NavigatorScreenParams<PreferenceStackParamsList>
 
 	Guest: NavigatorScreenParams<GuestUserStackParamsList>
 
@@ -36,6 +41,8 @@ const Root = createStackNavigator()
 
 const RootNavigator: React.FC = () => {
 	const { currentRoute } = useRouteState(state => state)
+
+	console.log({ currentRoute })
 	useEffect(() => {
 		StatusBar.setBackgroundColor('white')
 	}, [])
@@ -43,9 +50,11 @@ const RootNavigator: React.FC = () => {
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<NavigationContainer onReady={() => RNBootSplash.hide()}>
-				<Root.Navigator headerMode='none' mode='modal'>
-					{renderScreens(currentRoute)}
-				</Root.Navigator>
+				<OverflowMenuProvider>
+					<Root.Navigator headerMode='none' mode='modal'>
+						{renderScreens(currentRoute)}
+					</Root.Navigator>
+				</OverflowMenuProvider>
 			</NavigationContainer>
 		</ThemeProvider>
 	)
@@ -69,33 +78,25 @@ const renderScreens = (currentRoute: RouteStates) => {
 		case 'Onboarding':
 			return (
 				<>
-					<Root.Screen name='Onboarding' component={OnBoardingNavigator} />
+					<Root.Screen name='OnBoardingMode' component={OnBoardingNavigator} />
 					<Root.Screen name='Auth' component={AuthStackNavigator} />
 				</>
 			)
 
 		case 'UserPreferences':
-			return <Root.Screen name='Preferences' component={Home} />
+			return <Root.Screen name='PreferenceMode' component={PreferenceNavigator} />
 
 		case 'Auth':
 			return <Root.Screen name='Auth' component={AuthStackNavigator} />
 
 		case 'GuestMode':
-			return (
-				<>
-					<Root.Screen name='Guest' component={Home} />
-					<Root.Screen name='StreamEvent' component={Home} />
-				</>
-			)
+			return <Root.Screen name='GuestMode' component={Home} />
 
 		case 'App':
-			return (
-				<>
-					<Root.Screen name='App' component={MainApp} />
-					{/* <Root.Screen name='JoinEvent' component={Home} /> */}
-					<Root.Screen name='StreamEvent' component={Home} />
-				</>
-			)
+			return <Root.Screen name='App' component={MainApp} />
+
+		case 'EventStream':
+			return <Root.Screen name='StreamEvent' component={StreamingNavigator} />
 
 		default:
 			return <Root.Screen name='Auth' component={Home} />

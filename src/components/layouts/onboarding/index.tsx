@@ -1,7 +1,5 @@
-import { AnimatedButton, AnimatedTextButton } from '@elements/Button'
-import Dot from '@elements/Dot'
-import Slide from '@elements/Slide'
 import React, { useRef, useState } from 'react'
+import { Dot, FocusAwareStatusBar, Slide, AnimatedTextButton } from '@elements'
 import {
 	ScrollView,
 	Platform,
@@ -63,6 +61,7 @@ export default ({ onOnboardingDone, joinEvent, signUp }: Props) => {
 
 	return (
 		<Div flex={1} alignItems='center' bg='white'>
+			<FocusAwareStatusBar hidden />
 			<Div flex={2}>
 				<ScrollView
 					horizontal
@@ -87,7 +86,6 @@ export default ({ onOnboardingDone, joinEvent, signUp }: Props) => {
 					))}
 				</ScrollView>
 			</Div>
-
 			<Div flex={1}>
 				<Div
 					justifyContent='center'

@@ -45,3 +45,11 @@ export interface UserInterest {
 	icon: any
 	title: Interests
 }
+
+export interface VideoItem {
+	id: string
+	imageSource?: number | string
+	user: string
+	// avatar: require('./assets/avatars/derek.russel.png'),
+	video: number //change to string later
+}

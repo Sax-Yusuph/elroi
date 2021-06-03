@@ -23,6 +23,7 @@ import {
 	FavouriteStackParamsList,
 } from './types'
 
+//DrawerNavigationProp<DrawerParamsList, 'Home'> //
 export type AppRootParams = CompositeNavigationProp<
 	DrawerNavigationProp<DrawerParamsList, 'Home'>,
 	StackNavigationProp<RootParamsList, 'App'>
@@ -37,10 +38,10 @@ export type EventNavigationProp = CompositeNavigationProp<
 //1
 export interface EventScreenProp {
 	navigation: CompositeNavigationProp<
-		StackNavigationProp<EventsStackParamsList, 'Events'>,
+		StackNavigationProp<EventsStackParamsList, 'EventScreen'>,
 		EventNavigationProp
 	>
-	route: RouteProp<EventsStackParamsList, 'Events'>
+	route: RouteProp<EventsStackParamsList, 'EventScreen'>
 }
 
 //2
@@ -71,10 +72,10 @@ export type NotesNavigationProp = CompositeNavigationProp<
 //1
 export interface NotesScreenProp {
 	navigation: CompositeNavigationProp<
-		StackNavigationProp<NotesStackParamsList, 'Notes'>,
+		StackNavigationProp<NotesStackParamsList, 'NoteScreen'>,
 		NotesNavigationProp
 	>
-	route: RouteProp<NotesStackParamsList, 'Notes'>
+	route: RouteProp<NotesStackParamsList, 'NoteScreen'>
 }
 
 //2
@@ -95,10 +96,14 @@ export type HomeNavigationProp = CompositeNavigationProp<
 //1
 export interface HomeScreenProp {
 	navigation: CompositeNavigationProp<
-		StackNavigationProp<HomeStackParamsList, 'Home'>,
+		StackNavigationProp<HomeStackParamsList, 'HomeScreen'>,
 		HomeNavigationProp
 	>
-	route: RouteProp<HomeStackParamsList, 'Home'>
+	// navigation: CompositeNavigationProp<
+	// 	StackNavigationProp<HomeStackParamsList, 'Home'>,
+	// 	HomeNavigationProp
+	// >
+	route: RouteProp<HomeStackParamsList, 'HomeScreen'>
 }
 
 //2
@@ -128,8 +133,8 @@ export type FavouriteNavigationProp = CompositeNavigationProp<
 //1
 export interface FavoriteScreenProp {
 	navigation: CompositeNavigationProp<
-		StackNavigationProp<FavouriteStackParamsList, 'Favorites'>,
+		StackNavigationProp<FavouriteStackParamsList, 'FavoriteScreen'>,
 		FavouriteNavigationProp
 	>
-	route: RouteProp<FavouriteStackParamsList, 'Favorites'>
+	route: RouteProp<FavouriteStackParamsList, 'FavoriteScreen'>
 }

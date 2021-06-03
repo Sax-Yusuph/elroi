@@ -17,9 +17,7 @@ const SignUp: React.FC<AuthScreenProps> = ({ navigation }) => {
 			//@ts-ignore
 			setCurrentRoute('App')
 		} else {
-			//@ts-ignore
-			setCurrentRoute('App')
-			// navigation.navigate('Preferences')
+			setCurrentRoute('UserPreferences')
 		}
 	}
 

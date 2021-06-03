@@ -22,7 +22,7 @@ const MainAppDrawer = createDrawerNavigator<DrawerParamsList>()
 
 const MainApp = () => {
 	return (
-		<MainAppDrawer.Navigator initialRouteName='Home'>
+		<MainAppDrawer.Navigator initialRouteName='Home' drawerPosition='right'>
 			<MainAppDrawer.Screen name='Home' component={HomeBottomTabs} />
 			<MainAppDrawer.Screen name='Host' component={EventHostBottomTabs} />
 		</MainAppDrawer.Navigator>

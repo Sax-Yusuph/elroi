@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import OnBoarding from '@screens/OnBoarding'
 import SignIn from '@screens/SignIn'
 import SignUp from '@screens/signUp'
@@ -12,12 +12,21 @@ import {
 	FavouriteStackParamsList,
 	EventsStackParamsList,
 	NotesStackParamsList,
+	StreamStackParamsList,
 } from 'navigation/types'
 import HomeScreen from '@screens/Home'
 import FavoritesScreen from '@screens/Favourites'
 import EventScreen from '@screens/Events'
 import SingleEventScreen from '@screens/SingleEvent'
 import NoteScreen from '@screens/Notes'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
+import Notifications from '@screens/Notifications'
+import { HeaderLeft, HeaderRight } from '@elements'
+import SingleNotification from '@screens/Notification'
+import EventStream from '@screens/eventStream'
+import Transcript from '@screens/Transcript'
+import FullScreenVideoMode from '@screens/FullScreenMode'
+import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types'
 
 // import NotesScreen from '@scenes/notes/notes.scene';
 // import EventScreen from '@scenes/events/events.scene';
@@ -53,13 +62,19 @@ const Onboarding = createStackNavigator<OnBoardingParamsList>()
 const Auth = createStackNavigator<AuthStackParamsList>()
 const Notes = createStackNavigator<NotesStackParamsList>()
 const AppHome = createStackNavigator<HomeStackParamsList>()
-// const Streaming = createSharedElementStackNavigator<StreamStackParamsList>();
 const Favorites = createStackNavigator<FavouriteStackParamsList>()
+
+//shared elements for smooth screen animations
+const Streaming = createSharedElementStackNavigator<StreamStackParamsList>()
 
 export const EventsNavigator = (): React.ReactElement => (
 	<EventsStack.Navigator>
-		<EventsStack.Screen name='Events' component={EventScreen} />
-		<EventsStack.Screen name='SingleEvent' component={SingleEventScreen} />
+		<EventsStack.Screen name='EventScreen' component={EventScreen} options={{ title: 'Events' }} />
+		<EventsStack.Screen
+			name='SingleEvent'
+			component={SingleEventScreen}
+			options={{ headerTitle: 'Event' }}
+		/>
 		{/* <EventsStack.Screen name="RegisterForEvent" component={RegisterForEvent} />  */}
 	</EventsStack.Navigator>
 )
@@ -90,60 +105,78 @@ export const AuthStackNavigator: FC = () => (
 
 export const NotesNavigator = (): React.ReactElement => (
 	<Notes.Navigator>
-		<Notes.Screen name='Notes' component={NoteScreen} />
+		<Notes.Screen name='NoteScreen' component={NoteScreen} options={{ title: 'Note' }} />
 		<Notes.Screen name='Note' component={NoteScreen} />
 	</Notes.Navigator>
 )
 
 export const HomeNavigator = (): React.ReactElement => (
 	<AppHome.Navigator>
-		<AppHome.Screen name='Home' component={HomeScreen} />
-		<AppHome.Screen name='Notifications' component={HomeScreen} />
-		<AppHome.Screen name='Notification' component={HomeScreen} />
+		<AppHome.Screen
+			name='HomeScreen'
+			component={HomeScreen}
+			options={props => ({
+				headerTitle: 'Home',
+				headerLeft: () => <HeaderLeft {...props} />,
+				headerRight: () => <HeaderRight {...props} />,
+			})}
+		/>
+		<AppHome.Screen name='Notifications' component={Notifications} />
+		<AppHome.Screen name='Notification' component={SingleNotification} />
 	</AppHome.Navigator>
 )
+/** event streaming screen configuration */
+// This Spec makes it so that the animation goes from 1000ms (very slow) to 500ms (acceptable) speed! You can also remove it if you want.
+export const iosTransitionSpec: TransitionSpec = {
+	animation: 'spring',
+	config: {
+		stiffness: 1000,
+		damping: 500,
+		mass: 3,
+		overshootClamping: true,
+		restDisplacementThreshold: 10,
+		restSpeedThreshold: 10,
+	},
+}
 
-// //@ts-ignore
-// const {Navigator, Screen} = createSharedElementStackNavigator();
+export const StreamingNavigator = (): React.ReactElement => (
+	<Streaming.Navigator
+		screenOptions={{
+			gestureEnabled: false,
+			...TransitionPresets.ModalSlideFromBottomIOS,
+			transitionSpec: {
+				open: iosTransitionSpec,
+				close: iosTransitionSpec,
+			},
+			cardStyleInterpolator: ({ current: { progress } }) => ({
+				cardStyle: {
+					opacity: progress,
+				},
+			}),
+		}}
+		headerMode='none'
+	>
+		<Streaming.Screen name='StreamingScreen' component={EventStream} />
+		<Streaming.Screen name='Transcript' component={Transcript} />
+		<Streaming.Screen
+			name='FullScreenVideoMode'
+			component={FullScreenVideoMode}
+			sharedElementsConfig={(route: any) => {
+				const { videoId } = route.params
 
-// // This Spec makes it so that the animation goes from 1000ms (very slow) to 500ms (acceptable) speed! You can also remove it if you want.
-// export const iosTransitionSpec = {
-//   animation: 'spring',
-//   config: {
-//     stiffness: 1000,
-//     damping: 500,
-//     mass: 3,
-//     overshootClamping: true,
-//     restDisplacementThreshold: 10,
-//     restSpeedThreshold: 10,
-//   },
-// };
-
-// export const StreamingNavigator = (): React.ReactElement => (
-//   <Streaming.Navigator
-//     // screenOptions={{
-//     //   gestureEnabled: false,
-//     //   headerShown: false,
-//     //   cardOverlayEnabled: true,
-//     //   cardStyle: {backgroundColor: 'transparent'},
-//     // }}
-//     mode="modal">
-//     <Streaming.Screen name="StreamingScreen" component={StreamingScreen} />
-//     <Streaming.Screen name="Transcript" component={Transcript} />
-//     <Streaming.Screen
-//       name="FullScreenVideoMode"
-//       component={FullScreenMode}
-//       // sharedElements={(route: any) => [{id: route.params.video?.id}]}
-//     />
-//   </Streaming.Navigator>
-// );
+				return [{ id: videoId }]
+			}}
+		/>
+	</Streaming.Navigator>
+)
 
 export const FavouritesNavigator = (): React.ReactElement => (
 	<Favorites.Navigator>
-		<Favorites.Screen name='Favorites' component={FavoritesScreen} />
+		<Favorites.Screen
+			name='FavoriteScreen'
+			component={FavoritesScreen}
+			options={{ title: 'Favourites' }}
+		/>
 		<Favorites.Screen name='Favorite' component={FavoritesScreen} />
 	</Favorites.Navigator>
 )
-function createSharedElementStackNavigator<T>() {
-	throw new Error('Function not implemented.')
-}

@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react'
-import EventCard from '@elements/eventCard'
 import { Button, Div, useTheme } from 'react-native-magnus'
 import { useCollapsibleHeader } from 'react-navigation-collapsible'
 import { Animated } from 'react-native'
 import { EventData } from '@types'
+import { FocusAwareStatusBar, EventCard } from '@elements'
+
 interface Props {
 	viewEvent: (id: string) => void
 	findEvent: () => void
@@ -11,7 +12,11 @@ interface Props {
 }
 
 export default ({ viewEvent, findEvent, EventsData }: Props) => {
-	const renderFooter = () => <Button mr='xl'>Find Event</Button>
+	const renderFooter = () => (
+		<Button m='2xl' block>
+			Find Event
+		</Button>
+	)
 
 	const options = {
 		navigationOptions: {
@@ -27,6 +32,7 @@ export default ({ viewEvent, findEvent, EventsData }: Props) => {
 
 	return (
 		<Div bg='gray100'>
+			<FocusAwareStatusBar />
 			<Animated.FlatList
 				{...{ onScroll }}
 				contentContainerStyle={{ paddingTop: containerPaddingTop + 40 }}

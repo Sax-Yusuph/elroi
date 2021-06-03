@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Div, StatusBar } from 'react-native-magnus'
 import Data from './extra/data'
-import PreferencesCardItem from '@elements/preferenceCard'
 import { Interests } from '@models/app.model'
 import { ListHeader } from './extra/header'
 import { ListFooter } from './extra/footer'
+import { FocusAwareStatusBar, PreferencesCardItem } from '@elements'
 
 type Props = {
 	onFinished: () => void
@@ -24,7 +24,7 @@ export default ({ onFinished, goBack }: Props) => {
 
 	return (
 		<Div flex={1} bg='white'>
-			<StatusBar backgroundColor='blue800' />
+			<FocusAwareStatusBar backgroundColor='blue800' />
 
 			<FlatList
 				contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}

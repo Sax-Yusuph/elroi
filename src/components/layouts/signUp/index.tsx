@@ -1,10 +1,9 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
 import { KeyboardAvoidingView, Platform, useWindowDimensions } from 'react-native'
-import { Button, Div, Text, Input, Checkbox, Header, StatusBar } from 'react-native-magnus'
-import PatternBg from '@assets/img/svgs/patternpad.svg'
-import { ImageOverlay, OverlayImageStyle } from '@elements/imageOverlay'
+import { Button, Div, Text, Input, Checkbox } from 'react-native-magnus'
 import { ScrollView } from 'react-native-gesture-handler'
+import { OverlayImageStyle, FocusAwareStatusBar, ImageOverlay } from '@elements'
 
 type Props = {
 	handleSignUp: () => void
@@ -27,7 +26,7 @@ export default ({ handleSignUp }: Props) => {
 
 	return (
 		<Div flex={1} bg='white'>
-			<StatusBar backgroundColor='blue800' />
+			<FocusAwareStatusBar backgroundColor='blue800' />
 			<KeyboardAvoidingView
 				style={{ flex: 1 }}
 				behavior={Platform.select({

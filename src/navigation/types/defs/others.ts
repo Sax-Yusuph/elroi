@@ -7,21 +7,29 @@
  * CompositeNavigationProp<primary screen, secondary screen>
  */
 
-import { CompositeNavigationProp } from '@react-navigation/native'
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootParamsList } from '../..'
 
-import { AuthStackParamsList, PreferenceStackParamsList } from './types'
-
-type AuthRoot = StackNavigationProp<RootParamsList, 'Auth'>
+import { AuthStackParamsList, OnBoardingParamsList, PreferenceStackParamsList } from './types'
 
 export interface AuthScreenProps {
-	navigation: CompositeNavigationProp<StackNavigationProp<AuthStackParamsList, 'SignUp'>, AuthRoot>
+	navigation: CompositeNavigationProp<
+		StackNavigationProp<AuthStackParamsList, 'SignUp'>,
+		StackNavigationProp<RootParamsList, 'Auth'>
+	>
 }
 
 export interface PreferenceScreenProps {
 	navigation: CompositeNavigationProp<
 		StackNavigationProp<PreferenceStackParamsList, 'Preferences'>,
-		StackNavigationProp<RootParamsList, 'Preferences'>
+		StackNavigationProp<RootParamsList, 'PreferenceMode'>
+	>
+}
+
+export interface OnboardingScreenProps {
+	navigation: CompositeNavigationProp<
+		StackNavigationProp<OnBoardingParamsList, 'Onboarding'>,
+		StackNavigationProp<RootParamsList, 'OnBoardingMode'>
 	>
 }

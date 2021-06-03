@@ -19,7 +19,7 @@ export const ListFooter = ({ goBack, selectedItemLength, onSubmit }: ListFooterP
 			</Button>
 
 			<Button onPress={onSubmit} mx='lg' w={WIDTH}>
-				{selectedItemLength > 1 ? 'Finish' : 'Next'}
+				{selectedItemLength > 1 ? 'Finish' : 'Skip'}
 			</Button>
 		</Div>
 	)

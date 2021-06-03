@@ -1,23 +1,20 @@
 import { PreferenceScreenProps } from 'navigation/types'
 import React, { FC } from 'react'
 import ContentView from '@layouts/preferences'
-import { OptimizedHeavyScreen } from 'react-navigation-heavy-screen'
+import { useRouteState } from '@stores'
 
 const Preferences: FC<PreferenceScreenProps> = ({ navigation }) => {
+	const { setCurrentRoute } = useRouteState(state => state)
 	const onFinished = () => {
-		//@ts-ignore
-		navigation.replace('App')
+		setCurrentRoute('App')
 	}
 
 	const goBack = () => {
+		//quit app
 		navigation.goBack()
 	}
 
-	return (
-		<OptimizedHeavyScreen>
-			<ContentView {...{ onFinished, goBack }} />
-		</OptimizedHeavyScreen>
-	)
+	return <ContentView {...{ onFinished, goBack }} />
 }
 
 export default Preferences
