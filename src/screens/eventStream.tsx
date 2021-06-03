@@ -6,7 +6,7 @@ import MockData from '@layouts/streamer/extra/data'
 import { useRouteState } from '@stores'
 import { OnboardingScreenProps } from 'navigation/types'
 import { IStreamEvent } from '@types'
-import { VideoItem } from '@models/app.model'
+import { VideoItem } from '@models'
 
 const MockVideo: VideoItem = {
 	id: '2',

@@ -1,6 +1,6 @@
 import { Button, Div, Icon, Text } from 'react-native-magnus'
 import React from 'react'
-import { useWindowDimensions } from 'react-native'
+import { Pressable, useWindowDimensions } from 'react-native'
 
 interface MenuButtonProps {
 	onPress: () => void
@@ -19,14 +19,29 @@ const MenuButton = ({ onPress, color, text, cond, icon }: MenuButtonProps) => {
 
 	const BTN_WIDTH = width / 5
 	return (
-		<Button bg='transparent' rounded='circle' {...{ onPress }} w={BTN_WIDTH}>
-			<Div justifyContent='center' alignItems='center'>
-				<Icon fontSize={24} fontFamily='Ionicons' name={icon} color={cond ? 'red600' : 'gray800'} />
-				<Text fontSize='xs' fontWeight='600' color={cond ? 'red500' : 'gray800'}>
-					{text}
-				</Text>
-			</Div>
-		</Button>
+		<Pressable {...{ onPress }} style={{ width: BTN_WIDTH }}>
+			{({ pressed }) => (
+				<Div
+					justifyContent='center'
+					alignItems='center'
+					bg={pressed ? 'gray100' : 'transparent'}
+					borderColor='gray300'
+					borderWidth={pressed ? 1 : 0}
+					rounded='circle'
+					py='lg'
+				>
+					<Icon
+						fontSize={24}
+						fontFamily='Ionicons'
+						name={icon}
+						color={cond ? 'red600' : 'blue900'}
+					/>
+					<Text fontSize='xs' fontWeight='600' color={cond ? 'red500' : 'gray800'}>
+						{text}
+					</Text>
+				</Div>
+			)}
+		</Pressable>
 	)
 }
 

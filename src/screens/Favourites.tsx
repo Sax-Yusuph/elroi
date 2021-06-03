@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ContentView from '@layouts/favorites'
 import { FavoriteScreenProp } from 'navigation/types'
-import { Data } from '@models/mockData'
+import { Data } from '@models'
 import { EventData } from '@types'
 import { OptimizedHeavyScreen } from 'react-navigation-heavy-screen'
 

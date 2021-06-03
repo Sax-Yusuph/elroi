@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ContentView from '@layouts/home'
 import { HomeScreenProp } from 'navigation/types'
 import { EventData } from '@types'
-import { Data } from '@models/mockData'
+import { Data } from '@models'
 import { useEventState, useRouteState } from '@stores'
 
 const Home: React.FC<HomeScreenProp> = ({ navigation }) => {

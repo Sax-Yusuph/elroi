@@ -1,5 +1,4 @@
-import { FilterList } from '@models/app.model'
-import { EventData } from '@types'
+import { EventData, FilterList } from '@types'
 
 const Filters: FilterList = [
 	'Today',

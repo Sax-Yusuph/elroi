@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Div, Icon, IconProps, Text } from 'react-native-magnus'
-import { Pressable, StyleProp, StyleSheet, useWindowDimensions, ViewStyle } from 'react-native'
+import { Platform, Pressable, useWindowDimensions } from 'react-native'
 import { ModalTypes } from '@types'
 import { HiddenItem, OverflowMenu as ContextMenu } from 'react-navigation-header-buttons'
+
+import { MenuView } from '@react-native-menu/menu'
+import { EventMenuActions } from '@models'
 
 interface Props {
 	showModal: ({ type }: { type: ModalTypes }) => void
@@ -11,21 +14,49 @@ interface Props {
 
 const OverFlowMenu = ({ showModal }: Props) => {
 	const Menus: MenuItemProps[] = renderMenuProps(showModal)
+	const { width } = useWindowDimensions()
+
+	const BTN_WIDTH = width / 5
 
 	return (
-		<ContextMenu
-			style={{ marginHorizontal: 10 }}
-			OverflowIcon={({ color }) => (
-				<Div>
-					<Icon name='menu' fontFamily='Ionicons' fontSize={30} color={color} />
-					<Text fontSize='xs'>More</Text>
-				</Div>
-			)}
+		// <ContextMenu
+		// 	style={{ marginHorizontal: 10 }}
+		// 	OverflowIcon={({ color }) => (
+		// 		<Div>
+		// 			<Icon name='menu' fontFamily='Ionicons' fontSize={30} color={color} />
+		// 			<Text fontSize='xs'>More</Text>
+		// 		</Div>
+		// 	)}
+		// >
+		// 	{Menus.map((props, index) => (
+		// 		<MenuItem key={index} {...props} />
+		// 	))}
+		// </ContextMenu>
+		<MenuView
+			title='Menu Title'
+			onPressAction={({ nativeEvent }) => {
+				console.warn(JSON.stringify(nativeEvent))
+			}}
+			actions={EventMenuActions}
 		>
-			{Menus.map((props, index) => (
-				<MenuItem key={index} {...props} />
-			))}
-		</ContextMenu>
+			<Pressable>
+				{({ pressed }) => (
+					<Div
+						justifyContent='center'
+						alignItems='center'
+						bg={pressed ? 'gray100' : 'transparent'}
+						borderColor='gray300'
+						borderWidth={pressed ? 1 : 0}
+						rounded='circle'
+						py='lg'
+						w={BTN_WIDTH}
+					>
+						<Icon name='menu' color='blue900' fontFamily='Ionicons' fontSize={30} />
+						<Text fontSize='xs'>More</Text>
+					</Div>
+				)}
+			</Pressable>
+		</MenuView>
 	)
 }
 
@@ -35,17 +66,6 @@ export default OverFlowMenu
 interface MenuItemProps extends IconProps {
 	title: string
 	onPress?: () => void
-}
-
-const MenuItem = (props: MenuItemProps) => {
-	const { title, onPress, ...rest } = props
-
-	return (
-		<HiddenItem
-			{...{ title, onPress }}
-			icon={<Icon {...rest} fontFamily='Ionicons' fontSize='xl' />}
-		/>
-	)
 }
 
 /**2 */

@@ -42,11 +42,11 @@
 			"@lib/*": ["components/lib/*"],
 			"@navigation/*": ["navigation"],
 			"@screens/*": ["screens/*"],
-			"@models/*": ["models/*"],
 			"@globalStyles": ["styles"],
 			"@forms/*": ["components/forms/*"],
 			"@layouts/*": ["components/layouts/*"],
 			"@hooks/*": ["hooks/*"],
+			"@models": ["models"],
 			"@stores": ["stores"],
 			"@types": ["@types"],
 			"@elements": ["components/elements"]

@@ -7,9 +7,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { ProgressView } from '@react-native-community/progress-view'
 import VoiceNote from '@assets/img/svgs/voiceNote.svg'
 import { SharedElement } from 'react-navigation-shared-element'
-import { useFocusEffect, useIsFocused } from '@react-navigation/native'
-import { VideoItem } from '@models/app.model'
+import { useIsFocused } from '@react-navigation/native'
 import { Div, Text, Icon } from 'react-native-magnus'
+import { VideoItem } from '@models'
 
 // import Animated, { block } from 'react-native-reanimated'
 

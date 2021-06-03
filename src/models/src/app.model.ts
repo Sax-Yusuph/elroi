@@ -1,6 +1,5 @@
 import { RouteProp } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { ImageProps } from 'react-native'
 
 export interface Eva extends Record<string, any> {}
 

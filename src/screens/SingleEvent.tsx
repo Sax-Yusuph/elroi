@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import ContentView from '@layouts/singleEvent.tsx'
 import { StatusBar } from 'react-native-magnus'
-import { EventScreenProp, HomeScreenProp, SingleEventScreenProp } from 'navigation/types'
+import { SingleEventScreenProp } from 'navigation/types'
 import { EventData } from '@types'
-import { Data } from '@models/mockData'
+import { Data } from '@models'
 
 const SingleEvent: React.FC<SingleEventScreenProp> = ({ route, navigation }) => {
 	const [event, setEvent] = useState<EventData | null>(null)

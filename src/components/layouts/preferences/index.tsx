@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Div, StatusBar } from 'react-native-magnus'
 import Data from './extra/data'
-import { Interests } from '@models/app.model'
 import { ListHeader } from './extra/header'
 import { ListFooter } from './extra/footer'
 import { FocusAwareStatusBar, PreferencesCardItem } from '@elements'
+import { Interests } from '@models'
 
 type Props = {
 	onFinished: () => void

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Input, Div, Icon } from 'react-native-magnus'
-import { StyleSheet, TextInput, View } from 'react-native'
-import { InputProps } from '@models/app.model'
+import { InputProps } from '@models'
 
 const SearchEventInput = ({ onSubmit }: InputProps) => {
 	const [eventId, setEventId] = useState<string>('')

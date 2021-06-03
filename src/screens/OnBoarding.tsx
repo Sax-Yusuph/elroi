@@ -1,10 +1,6 @@
 import React, { memo } from 'react'
 
-import { RootMainNavigationProp } from '../router/routerTypes'
 import ContentView from '@layouts/onboarding'
-import useStatusBar from '@hooks/useStatusBar'
-import { RootParamsList } from '@navigation/index'
-import { StackNavigationProp } from '@react-navigation/stack'
 import { useRouteState } from '@stores'
 import { OnboardingScreenProps } from 'navigation/types'
 

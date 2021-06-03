@@ -1,5 +1,5 @@
+import { Filter, FilterList } from '@models'
 import React, { Dispatch, SetStateAction } from 'react'
-import { Filter, FilterList } from '@models/app.model'
 import { FlatList, StyleProp, useWindowDimensions, ViewStyle } from 'react-native'
 import { Button, Div } from 'react-native-magnus'
 

@@ -14,6 +14,7 @@ const BottomNav = (props: SBottomNavProps) => {
 
 		return 'gray500'
 	}
+
 	const { bottom } = useSafeAreaInsets()
 
 	const { width } = useWindowDimensions()
@@ -29,7 +30,7 @@ const BottomNav = (props: SBottomNavProps) => {
 			/>
 			<MenuButton
 				onPress={() => handleMenuPress({ type: 'audio' })}
-				text={muted ? 'Unmute' : 'Mute'}
+				text={audioActive ? 'headset' : 'audio'}
 				color={renderColor(audioActive)}
 				cond={audioActive}
 				icon='headset'

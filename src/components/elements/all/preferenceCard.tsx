@@ -1,6 +1,6 @@
+import { UserInterest, Interests } from '@types'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
-import { Interests, UserInterest } from '@models/app.model'
 import { Div, Text, Checkbox } from 'react-native-magnus'
 import TouchableScale from 'react-native-touchable-scale'
 

@@ -3,7 +3,7 @@ import ContentView from '@layouts/events'
 import { StatusBar } from 'react-native-magnus'
 import { EventScreenProp, HomeScreenProp } from 'navigation/types'
 import { EventData } from '@types'
-import { Data } from '@models/mockData'
+import { Data } from '@models'
 
 const EventScreen: React.FC<EventScreenProp> = ({ navigation }) => {
 	const [EventsData, setEventsData] = useState<EventData[]>([])

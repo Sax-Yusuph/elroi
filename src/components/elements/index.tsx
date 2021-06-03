@@ -1,7 +1,7 @@
 export { default as BlurredBackground } from './all/blurredBackground'
 export { default as Dot } from './all/Dot'
 export { default as EventCard } from './all/eventCard'
-export { default as EventFilter } from './all/eventFilter'
+export { default as EventFilters } from './all/eventFilter'
 export { default as Image } from './all/Image'
 export { default as JoinEventInput } from './all/joinEventInput'
 export { default as ListItem } from './all/ListItem'

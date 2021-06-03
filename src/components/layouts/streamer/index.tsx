@@ -29,6 +29,7 @@ export default (props: Props) => {
 
 			<FlatList
 				data={MockData}
+				keyExtractor={(_, i) => i.toString()}
 				// ListHeaderComponent={renderheader}
 				ListFooterComponent={<Div h={100} />}
 				renderItem={({ item }) => <EventAccordion {...item} />}
