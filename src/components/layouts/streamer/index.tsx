@@ -9,6 +9,7 @@ import FooterMenu from './extra/footer'
 import { FocusAwareStatusBar, Player, EventAccordion } from '@elements'
 import { PlayerProps } from 'components/elements/all/Player'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 interface Props extends PlayerProps {
 	data: IStreamEvent[] | null
@@ -22,20 +23,26 @@ export default (props: Props) => {
 	const { top } = useSafeAreaInsets()
 
 	return (
-		<Div pt={top} flex={1} bg='gray100'>
-			<FocusAwareStatusBar />
-			<EventStatus eventTitle="The Beleiver's book wednesday meetings" views={3000} status='Live' />
-			<Player {...rest} />
+		<BottomSheetModalProvider>
+			<Div pt={top} flex={1} bg='gray100'>
+				<FocusAwareStatusBar />
+				<EventStatus
+					eventTitle="The Beleiver's book wednesday meetings"
+					views={3000}
+					status='Live'
+				/>
+				<Player {...rest} />
 
-			<FlatList
-				data={MockData}
-				keyExtractor={(_, i) => i.toString()}
-				// ListHeaderComponent={renderheader}
-				ListFooterComponent={<Div h={100} />}
-				renderItem={({ item }) => <EventAccordion {...item} />}
-			/>
+				<FlatList
+					data={MockData}
+					keyExtractor={(_, i) => i.toString()}
+					// ListHeaderComponent={renderheader}
+					ListFooterComponent={<Div h={100} />}
+					renderItem={({ item }) => <EventAccordion {...item} />}
+				/>
 
-			<FooterMenu {...{ leaveEvent }} />
-		</Div>
+				<FooterMenu {...{ leaveEvent }} />
+			</Div>
+		</BottomSheetModalProvider>
 	)
 }

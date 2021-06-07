@@ -1,24 +1,26 @@
 import React, { memo } from 'react'
 
-import ContentView from '@layouts/onboarding'
+import { Onboarding as ContentView } from '@layouts'
 import { useRouteState } from '@stores'
 import { OnboardingScreenProps } from 'navigation/types'
 
 const OnBoarding: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
-	const { setCurrentRoute } = useRouteState(state => state)
+	const { setCurrentRoute, setPreviousRoute } = useRouteState(state => state)
 
 	const onOnboardingDone = () => {
 		navigation.navigate('Auth', { screen: 'SignUp' })
 	}
 
 	const joinEvent = () => {
+		setPreviousRoute('Onboarding')
 		setCurrentRoute('GuestMode')
 		navigation.navigate('Guest', { screen: 'JoinEvent' })
 	}
 
 	const signUp = () => {
 		// setCurrentRoute('Auth')
-		navigation.navigate('Auth', { screen: 'SignUp' })
+		setPreviousRoute('Onboarding')
+		setCurrentRoute('Auth')
 	}
 	return <ContentView {...{ onOnboardingDone, joinEvent, signUp }} />
 })

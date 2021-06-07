@@ -1,27 +1,28 @@
-import React, { memo } from 'react'
-
-import ContentView from '@layouts/onboarding'
-
+import React, { memo, useEffect, useState } from 'react'
+import { Transcript as ContentView } from '@layouts'
 import { useRouteState } from '@stores'
 import { OnboardingScreenProps } from 'navigation/types'
+import { TranscriptText } from '@models'
+import { ITranscript } from '@types'
 
 const Transcript: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
 	const { setCurrentRoute } = useRouteState(state => state)
 
-	const onOnboardingDone = () => {
-		navigation.navigate('Auth', { screen: 'SignUp' })
-	}
+	const [transcriptData, setTranscriptData] = useState<ITranscript | null>(null)
 
-	const joinEvent = () => {
-		setCurrentRoute('GuestMode')
-		navigation.navigate('Guest', { screen: 'JoinEvent' })
+	useEffect(() => {
+		setTranscriptData(TranscriptText)
+	}, [])
+
+	const goBack = () => {
+		navigation.goBack()
 	}
 
 	const signUp = () => {
 		// setCurrentRoute('Auth')
 		navigation.navigate('Auth', { screen: 'SignUp' })
 	}
-	return <ContentView {...{ onOnboardingDone, joinEvent, signUp }} />
+	return <ContentView {...{ goBack, transcriptData }} />
 })
 
 export default Transcript

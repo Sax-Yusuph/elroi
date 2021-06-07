@@ -44,7 +44,7 @@ export const EventMenuActions: MenuAction[] = [
 		titleColor: '#2a4365',
 		image: Platform.select({
 			ios: 'square.and.arrow.up',
-			android: 'ic_menu_share',
+			android: 'sym_action_chat',
 		}),
 		imageColor: '#46F289',
 		state: 'on',
@@ -54,10 +54,10 @@ export const EventMenuActions: MenuAction[] = [
 		title: 'Note',
 		titleColor: '#2a4365',
 		subtitle: 'Take down some notes',
-		// image: Platform.select({
-		// 	ios: 'heart.fill',
-		// 	android: 'ic_menu_today',
-		// }),
+		image: Platform.select({
+			ios: 'heart.fill',
+			android: 'ic_menu_edit',
+		}),
 		imageColor: '#2a4365',
 		state: 'mixed',
 	},
@@ -69,10 +69,10 @@ export const EventMenuActions: MenuAction[] = [
 		attributes: {
 			// disabled: true,
 		},
-		// image: Platform.select({
-		// 	ios: 'tray',
-		// 	android: 'ic_menu_agenda',
-		// }),
+		image: Platform.select({
+			ios: 'tray',
+			android: 'sym_contact_card',
+		}),
 	},
 	{
 		id: 'report',
@@ -82,6 +82,10 @@ export const EventMenuActions: MenuAction[] = [
 		attributes: {
 			// hidden: true,
 		},
+		image: Platform.select({
+			ios: 'trash',
+			android: 'stat_sys_warning',
+		}),
 	},
 	{
 		id: 'review',
@@ -90,9 +94,9 @@ export const EventMenuActions: MenuAction[] = [
 		attributes: {
 			// destructive: true,
 		},
-		// image: Platform.select({
-		// 	ios: 'trash',
-		// 	android: 'ic_menu_delete',
-		// }),
+		image: Platform.select({
+			ios: 'trash',
+			android: 'ic_dialog_info',
+		}),
 	},
 ]

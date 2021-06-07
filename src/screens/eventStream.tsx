@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react'
 
-import ContentView from '@layouts/streamer'
-import MockData from '@layouts/streamer/extra/data'
+import { Streamer as ContentView } from '@layouts'
+import { StreamingData as MockData } from '@models'
 
 import { useRouteState } from '@stores'
-import { OnboardingScreenProps } from 'navigation/types'
+import { StreamingScreenProps } from 'navigation/types'
 import { IStreamEvent } from '@types'
 import { VideoItem } from '@models'
 
@@ -16,10 +16,11 @@ const MockVideo: VideoItem = {
 	video: require('@assets/lights.mp4'),
 }
 
-const EventStream: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
-	const { setCurrentRoute } = useRouteState(state => state)
+const EventStream: React.FC<StreamingScreenProps> = memo(({ navigation }) => {
 	const [data, setData] = useState<IStreamEvent[] | null>(null)
 	const [video, setVideo] = useState<VideoItem | null>(null)
+
+	const { setCurrentRoute, setPreviousRoute, currentRoute } = useRouteState(state => state)
 
 	useEffect(() => {
 		setData(MockData)
@@ -27,13 +28,20 @@ const EventStream: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
 	}, [])
 
 	const leaveEvent = () => {
+		setPreviousRoute('EventStream')
+
+		if (currentRoute === 'GuestMode') {
+			setCurrentRoute('GuestMode')
+		} else {
+			setCurrentRoute('App')
+		}
 		// if is guest mode..navigate to geustmide view,, else navigate to home
-		// navigation.navigate('Auth', { screen: 'SignUp' })
 	}
 
 	const openFullScreenMode = () => {
-		setCurrentRoute('GuestMode')
-		navigation.navigate('Guest', { screen: 'JoinEvent' })
+		if (video) {
+			navigation.navigate('FullScreenVideoMode', { video })
+		}
 	}
 
 	const onProgressChange = () => {
@@ -42,7 +50,7 @@ const EventStream: React.FC<OnboardingScreenProps> = memo(({ navigation }) => {
 
 	const viewTranscript = () => {
 		// setCurrentRoute('Auth')
-		// navigation.navigate('Auth', { screen: 'SignUp' })
+		navigation.navigate('Transcript', { eventId: 'random string' })
 	}
 	return (
 		<ContentView

@@ -44,7 +44,7 @@
 			"@screens/*": ["screens/*"],
 			"@globalStyles": ["styles"],
 			"@forms/*": ["components/forms/*"],
-			"@layouts/*": ["components/layouts/*"],
+			"@layouts": ["components/layouts"],
 			"@hooks/*": ["hooks/*"],
 			"@models": ["models"],
 			"@stores": ["stores"],

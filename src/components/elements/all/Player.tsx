@@ -1,21 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Pressable, useWindowDimensions } from 'react-native'
-import Video, { OnLoadData, OnProgressData } from 'react-native-video'
+import Video, { LoadError, OnBufferData, OnLoadData, OnProgressData } from 'react-native-video'
 import * as Animatable from 'react-native-animatable'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-
+import LottieView from 'lottie-react-native'
 import { ProgressView } from '@react-native-community/progress-view'
 import VoiceNote from '@assets/img/svgs/voiceNote.svg'
 import { SharedElement } from 'react-navigation-shared-element'
 import { useIsFocused } from '@react-navigation/native'
 import { Div, Text, Icon } from 'react-native-magnus'
 import { VideoItem } from '@models'
+import Animated from 'react-native-reanimated'
 
 // import Animated, { block } from 'react-native-reanimated'
 
 export interface PlayerProps {
 	onPress?: () => void
-	viewTranscript?: () => void
+	viewTranscript: () => void
 	openFullScreenMode: (id: string) => void
 	onProgressChange: (a: number) => void
 	video: VideoItem | null
@@ -34,11 +35,15 @@ const initialState = {
 }
 
 export const Player = (props: PlayerProps) => {
-	const { onPress, onProgressChange, video, openFullScreenMode } = props
+	const { viewTranscript, onProgressChange, video, openFullScreenMode } = props
 	const [opacity, setOpacity] = React.useState(1)
 	const { width } = useWindowDimensions()
 	const height = width * 0.5625
 	const [videoState, setVideoState] = useState<VideoState>(initialState)
+
+	let loadingAnimation = useRef<LottieView | null>(null).current
+
+	const [bufferring, setBufferring] = useState(true)
 
 	const videoRef = useRef<Video | null>(null)
 
@@ -55,10 +60,6 @@ export const Player = (props: PlayerProps) => {
 			onProgressChange(videoState.progress)
 		}
 	}, [videoState.progress])
-
-	const viewTranscript = () => {
-		viewTranscript()
-	}
 
 	const onLoad = (meta: OnLoadData) => {
 		setVideoState(prev => ({
@@ -81,6 +82,22 @@ export const Player = (props: PlayerProps) => {
 		}))
 	}
 
+	const onLoadStart = () => {
+		loadingAnimation?.play()
+	}
+
+	const onBuffer = (meta: OnBufferData) => {
+		if (meta.isBuffering) {
+			loadingAnimation?.play()
+		} else {
+			loadingAnimation?.pause()
+		}
+
+		console.log({ b: meta.isBuffering })
+		setBufferring(meta.isBuffering)
+	}
+
+	const onError = (err: LoadError) => {}
 	return (
 		<Div bg='blue800' m='lg' p='xl' rounded='lg' h={height * 1.7}>
 			<Pressable
@@ -92,26 +109,47 @@ export const Player = (props: PlayerProps) => {
 			>
 				{video ? (
 					<SharedElement id={video.id}>
-						<Animatable.View transition='opacity' style={{ opacity }}>
+						<Animatable.View
+							transition='opacity'
+							style={{
+								opacity,
+								height,
+								backgroundColor: bufferring ? 'black' : undefined,
+								borderRadius: 10,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
 							<Video
-								source={video.video}
+								source={video?.video}
 								resizeMode='cover'
 								style={{ width: '100%', borderRadius: 10, height }}
-								// repeat
+								repeat
 								poster='paused'
 								audioOnly={false}
 								fullscreen={false}
 								fullscreenOrientation='landscape'
 								playInBackground={false}
 								paused={videoState.paused}
-								{...{ onLoad, onProgress, onEnd }}
+								{...{ onLoad, onProgress, onEnd, onLoadStart, onBuffer, onError }}
 								ref={ref => (videoRef.current = ref)}
 
 								// pictureInPicture={true}
 							/>
+
+							{!bufferring && (
+								<LottieView
+									source={require('@assets/lottie/loading.json')}
+									ref={ref => (loadingAnimation = ref)}
+									style={{ width: 200, height: 200, position: 'absolute' }}
+									// progress={bufferProgressAnimation}
+								/>
+							)}
 						</Animatable.View>
 					</SharedElement>
-				) : null}
+				) : (
+					<EmptyVideo {...{ opacity, height }} />
+				)}
 			</Pressable>
 
 			<Div mt='lg' overflow='hidden' justifyContent='space-evenly' alignItems='center'>
@@ -138,7 +176,7 @@ export const Player = (props: PlayerProps) => {
 
 			<Div position='absolute' w='100%' row justifyContent='space-between' ml='xl' bottom={10}>
 				<Text fontSize='sm' color='white'>
-					<Icon name='md-volume-medium' fontFamily='Ionicons' ml='md' />
+					<Icon name='md-volume-medium' fontFamily='Ionicons' ml='lg' />
 					Audio
 				</Text>
 
@@ -151,3 +189,27 @@ export const Player = (props: PlayerProps) => {
 		</Div>
 	)
 }
+
+type EmptyVideoProps = { opacity: number; height: number }
+
+const EmptyVideo = ({ opacity, height }: EmptyVideoProps) => (
+	<Animatable.View
+		transition='opacity'
+		style={{
+			opacity,
+			height,
+			backgroundColor: 'black',
+			borderRadius: 10,
+			justifyContent: 'center',
+			alignItems: 'center',
+		}}
+	>
+		<LottieView
+			source={require('@assets/lottie/loading.json')}
+			loop
+			autoPlay
+			style={{ width: 200, height: 200, position: 'absolute' }}
+			// progress={bufferProgressAnimation}
+		/>
+	</Animatable.View>
+)

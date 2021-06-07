@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { OptimizedHeavyScreen } from 'react-navigation-heavy-screen'
-import ContentView from '@layouts/notes'
+import { Notes as ContentView } from '@layouts'
 import { StatusBar } from 'react-native-magnus'
 import { HomeScreenProp } from 'navigation/types'
-import { Data as NotesData, Note } from '@layouts/notes/extra/data'
+import { NotesData } from '@models'
 import { useIsFocused } from '@react-navigation/native'
+import { Note } from '@types'
 
 const Notes: React.FC<HomeScreenProp> = ({ navigation }) => {
 	const [Data, setData] = useState<Note[]>([])

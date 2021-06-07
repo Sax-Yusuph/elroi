@@ -1,6 +1,6 @@
 import { PreferenceScreenProps } from 'navigation/types'
 import React, { FC } from 'react'
-import ContentView from '@layouts/preferences'
+import { Preferences as ContentView } from '@layouts'
 import { useRouteState } from '@stores'
 
 const Preferences: FC<PreferenceScreenProps> = ({ navigation }) => {

@@ -1,5 +1,6 @@
 import { RouteProp } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { ImageSourcePropType } from 'react-native'
 
 export interface Eva extends Record<string, any> {}
 
@@ -47,7 +48,8 @@ export interface UserInterest {
 
 export interface VideoItem {
 	id: string
-	imageSource?: number | string
+	imageSource?: ImageSourcePropType //change to string later
+
 	user: string
 	// avatar: require('./assets/avatars/derek.russel.png'),
 	video: number //change to string later

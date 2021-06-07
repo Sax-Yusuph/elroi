@@ -48,7 +48,7 @@ const commonComponents: ThemeType['components'] = {
 			},
 			brand: {
 				bg: 'blue800',
-				underlayColor: 'blue900',
+				underlayColor: 'blue700',
 			},
 
 			'warning-border': {
@@ -80,10 +80,10 @@ const commonComponents: ThemeType['components'] = {
 				bg: 'transparent',
 			},
 			'brand-border': {
-				borderWidth: 2,
+				borderWidth: 1,
 				borderColor: 'blue800',
 				color: 'blue800',
-				underlayColor: 'blue200',
+				underlayColor: 'blue100',
 				bg: 'transparent',
 			},
 		},
@@ -151,8 +151,8 @@ export const lightTheme: ThemeType = {
 		textDark: 'gray900',
 	},
 	fontFamily: {
-		normal: 'ProximaNova-Regular',
-		bold: 'OpenSans-Bold',
+		normal: 'Inter-Medium',
+		bold: 'Inter-Bold',
 		// medium: 'Karla-Medium',
 		100: 'Karla-Regular',
 		500: 'Inter-Medium',

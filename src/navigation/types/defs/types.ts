@@ -4,6 +4,8 @@
  *
  * *****************/
 
+import { VideoItem } from '@models'
+
 //Events
 export type EventsStackParamsList = {
 	EventScreen: undefined
@@ -38,7 +40,7 @@ export type HomeStackParamsList = {
 export type StreamStackParamsList = {
 	StreamingScreen: { eventId: string }
 	Transcript: { eventId: string }
-	FullScreenVideoMode: { videoId: string }
+	FullScreenVideoMode: { video: VideoItem }
 }
 
 export type AuthStackParamsList = {

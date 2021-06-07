@@ -1,5 +1,5 @@
 import React from 'react'
-import ContentView from '@layouts/signUp'
+import { Signup as ContentView } from '@layouts'
 import useStatusBar from '@hooks/useStatusBar'
 import { AuthScreenProps } from 'navigation/types/defs/others'
 import { useAppState } from 'stores/parts/themeStore'

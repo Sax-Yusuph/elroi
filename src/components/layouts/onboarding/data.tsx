@@ -1,4 +1,4 @@
-import { SlideProps } from '@elements/Slide'
+import { SlideProps } from 'components/elements/all/Slide'
 
 const Data: SlideProps[] = [
 	{

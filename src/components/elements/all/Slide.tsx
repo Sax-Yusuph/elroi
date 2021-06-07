@@ -11,9 +11,9 @@ export type SlideProps = {
 	subtitle?: string
 	onPress?: () => void
 	isFinal?: boolean
-	Indicator: React.FC<DivProps>
-	onSkip: (a: number) => void
-	index: number
+	Indicator?: React.FC<DivProps>
+	onSkip?: (a: number) => void
+	index?: number
 }
 
 const Slide: React.FC<SlideProps> = props => {

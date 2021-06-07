@@ -141,18 +141,24 @@ export const iosTransitionSpec: TransitionSpec = {
 
 export const StreamingNavigator = (): React.ReactElement => (
 	<Streaming.Navigator
+		// screenOptions={{
+		// 	gestureEnabled: false,
+		// 	...TransitionPresets.ModalSlideFromBottomIOS,
+		// 	transitionSpec: {
+		// 		open: iosTransitionSpec,
+		// 		close: iosTransitionSpec,
+		// 	},
+		// 	cardStyleInterpolator: ({ current: { progress } }) => ({
+		// 		cardStyle: {
+		// 			opacity: progress,
+		// 		},
+		// 	}),
+		// }}
 		screenOptions={{
 			gestureEnabled: false,
-			...TransitionPresets.ModalSlideFromBottomIOS,
-			transitionSpec: {
-				open: iosTransitionSpec,
-				close: iosTransitionSpec,
-			},
-			cardStyleInterpolator: ({ current: { progress } }) => ({
-				cardStyle: {
-					opacity: progress,
-				},
-			}),
+			headerShown: false,
+			cardOverlayEnabled: true,
+			cardStyle: { backgroundColor: 'transparent' },
 		}}
 		headerMode='none'
 	>
@@ -162,9 +168,9 @@ export const StreamingNavigator = (): React.ReactElement => (
 			name='FullScreenVideoMode'
 			component={FullScreenVideoMode}
 			sharedElementsConfig={(route: any) => {
-				const { videoId } = route.params
+				const { video } = route.params
 
-				return [{ id: videoId }]
+				return [{ id: video.id }]
 			}}
 		/>
 	</Streaming.Navigator>

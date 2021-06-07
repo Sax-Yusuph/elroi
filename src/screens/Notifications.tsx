@@ -1,8 +1,7 @@
 import React, { FC, memo, useEffect, useState } from 'react'
-import { data as Mockdata } from '@layouts/notifications/data'
-import ContentView from '@layouts/notifications'
+import { NotificationsData as Mockdata } from '@models'
+import { Notifications as ContentView } from '@layouts'
 import { Notification } from '@types'
-import { StatusBar } from 'react-native-magnus'
 import { NotificationScreenProp } from 'navigation/types'
 
 const Notifications: FC<NotificationScreenProp> = memo(({ navigation }) => {

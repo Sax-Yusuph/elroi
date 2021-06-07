@@ -8,7 +8,6 @@ import CustomImage from './Image'
 
 export const EventAccordion = ({ section, content, events }: IStreamEvent) => {
 	const { animatedHeight, height, onPress, onLayout, state } = useCollapsible()
-	console.log(state)
 	return (
 		<Div overflow='hidden' bg='white' rounded='lg' m='lg' my='md' p='lg' flex={1} shadow='xs'>
 			<Pressable onPress={onPress} style={{ paddingLeft: 5 }}>

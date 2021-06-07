@@ -5,30 +5,6 @@ import { ImageProps, ImageSourcePropType } from 'react-native'
 import { BottomTabNavigationOptions, BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { CompositeNavigationProp } from '@react-navigation/native'
 
-export type BottomTabOptions = {
-	route: RouteProp<Record<string, object | undefined>, 'More'>
-	navigation: any
-}
-
-export interface ScreenProps<T extends ParamListBase, K extends string> {
-	navigation: StackNavigationProp<T, K>
-	route: RouteProp<T, K>
-	// Route;
-}
-
-export interface Eva extends Record<string, any> {}
-
-interface Route extends RouteProp<Record<string, object | undefined>, string> {
-	state?: any
-}
-
-export type Navigation = StackNavigationProp<any, any>
-
-export interface ScreenOptions {
-	route: Route
-	navigation?: any
-}
-
 export interface InputProps {
 	onSubmit: (text: string) => void
 }
@@ -191,3 +167,9 @@ interface QuickReplies {
 	values: Reply[]
 	keepIt?: boolean
 }
+
+export type Note = { createdAt: Date; content: string; id: string | number }
+
+export type ModalAction = { type: ModalTypes; close?: boolean }
+
+export type ShowModal = ({ type, close }: ModalAction) => void
